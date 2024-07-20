@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesimg.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="upload-section">
+            <h1>Upload an Image</h1>
+            <form id="upload-form" action="/process" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="file-input" required>
+            </form>
+        </div>
+        <div class="options-section">
+            <div class="option-box" data-action="resize">Resize 300x300 270kb 1:1 ratio</div>
+            <div class="option-box" data-action="resize1">Resize 800x600 4:3 ratio</div>
+            <div class="option-box" data-action="crop">Crop</div>
+            <div class="option-box" data-action="black_white">Black & White</div>
+            <div class="option-box" data-action="enhance_color">Enhance Color</div>
+            <div class="option-box" data-action="sharpen">Sharpen</div>
+            <div class="option-box" data-action="rotate">Rotate</div>
+            <div class="option-box" data-action="blur">Blur</div>
+            <div class="option-box" data-action="thumbnail">Thumbnail</div>
+            <div class="option-box" data-action="flip">Flip</div>
+            <div class="option-box" data-action="transpose">Transpose</div>
+            <div class="option-box" data-action="flip_top_bottom">Flip Top Bottom</div>
+            <div class="option-box" data-action="rotate_45">Rotate 45°</div>
+            <div class="option-box" data-action="rotate_expand">Rotate 45° Expand</div>
+            <div class="option-box" data-action="crop_large">Crop Large</div>
+            <div class="option-box" data-action="resize_low_res">Resize Low Res</div>
+            <div class="option-box" data-action="watermark">Add Watermark</div>
+            <div class="option-box" data-action="text_watermark">Add Text Watermark</div>
+            <div class="option-box" data-action="contrast">Adjust Contrast</div>
+            <div class="option-box" data-action="brightness">Adjust Brightness</div>
+            <div class="option-box" data-action="sharpness">Adjust Sharpness</div>
+            <div class="option-box" data-action="color">Adjust Color</div>
+            <div class="option-box" data-action="passport_size">passportsize crop</div>
+        </div>
+    </div>
+    <script>
+        function processOption(action) {
+            document.getElementById('upload-form').action = '/process?action=' + action;
+            document.getElementById('upload-form').submit();
+        }
+        document.querySelectorAll('.option-box').forEach(box => {
+            box.addEventListener('click', function() {
+                const form = document.getElementById('upload-form');
+                const action = this.getAttribute('data-action');
+                const input = document.getElementById('file-input');
+
+                if (input.files.length === 0) {
+                    alert('Please select a file first.');
+                    return;
+                }
+
+                const formData = new FormData(form);
+                formData.append('action', action);
+
+                fetch('/process', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    window.open(url);
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+/* Basic Reset */
+body, h1, form {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container Styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Upload Section Styling */
+.upload-section {
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #04ff00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0d7d22;
+}
+
+/* Options Section Styling */
+.options-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Option Box Styling */
+.option-box {
+    background-color: #0df333;
+    color: #fff;
+    border: 1px solid #0df40d;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    width: 120px;
+    height: 100px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.option-box:hover {
+    background-color: #099b4a;
+    transform: scale(1.05);
+}
+
+.option-box:active {
+    background-color: #c3f37c;
+    transform: scale(1);
+}
